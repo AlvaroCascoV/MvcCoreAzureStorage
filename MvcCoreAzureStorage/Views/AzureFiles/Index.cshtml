@@ -11,7 +11,10 @@
     <ul class="list-group">
         @foreach(string fileName in Model)
         {
-            <li class="list-group-item">@fileName</li>
+            <li class="list-group-item">@fileName
+                <a asp-controller="AzureFiles" asp-action="ReadFile" asp-route-filename="@fileName" class="btn btn-primary">Read</a>
+                <a asp-controller="AzureFiles" asp-action="DeleteFile" asp-route-filename="@fileName" class="btn btn-danger">Delete</a>
+            </li>
         }
     </ul>
 }

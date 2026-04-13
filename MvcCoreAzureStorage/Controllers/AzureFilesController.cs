@@ -16,15 +16,15 @@ namespace MvcCoreAzureStorage.Controllers
             List<string> files = await this.service.GetFilesAsync();
             return View(files);
         }
-        public async Task<IActionResult> ReadFile(string fileName)
+        public async Task<IActionResult> ReadFile(string filename)
         {
-            string data = await this.service.ReadFileAsync(fileName);
+            string data = await this.service.ReadFileAsync(filename);
             ViewData["DATA"] = data;
             return View();
         }
-        public async Task<IActionResult> DeleteFile(string fileName)
+        public async Task<IActionResult> DeleteFile(string filename)
         {
-            await this.service.DeleteFileAsync(fileName);
+            await this.service.DeleteFileAsync(filename);
             return RedirectToAction("Index");
         }
         public async Task<IActionResult> UploadFile()

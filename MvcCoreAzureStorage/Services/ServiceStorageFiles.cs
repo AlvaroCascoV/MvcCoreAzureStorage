@@ -41,6 +41,7 @@ namespace MvcCoreAzureStorage.Services
             {
                 contenido = await reader.ReadToEndAsync();
             }
+            return contenido;
         }
 
         //subida de ficheros
