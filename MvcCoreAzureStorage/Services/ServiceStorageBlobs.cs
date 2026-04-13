@@ -50,10 +50,20 @@ namespace MvcCoreAzureStorage.Services
                 BlobModel model = new BlobModel();
                 model.Nombre = item.Name;
                 model.Container = containerName;
-                model.Url = blobClient.Uri.AbsoluteUri;
+                //model.Url = blobClient.Uri.AbsoluteUri;
+                model.Url = $"/AzureBlobs/GetImagen?container={containerName}&blobName={item.Name}";
                 blobs.Add(model);
             }
             return blobs;
+        }
+        //descargar el archivo blob para mostrarlo si el container es privado
+        public async Task<Stream> GetBlobStreamAsync(string containerName, string blobName)
+        {
+            BlobContainerClient containerClient = this.client.GetBlobContainerClient(containerName);
+            BlobClient blobClient = containerClient.GetBlobClient(blobName);
+            // Descargamos la información y obtenemos el stream del fichero
+            BlobDownloadInfo response = await blobClient.DownloadAsync();
+            return response.Content;
         }
 
         //METODO PARA ELIMINAR UN BLOB

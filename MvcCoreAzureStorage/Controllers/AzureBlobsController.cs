@@ -65,5 +65,11 @@ namespace MvcCoreAzureStorage.Controllers
             await this.service.DeleteBlobAsync(containerName, blobName);
             return RedirectToAction("ListBlobs", new { containerName = containerName });
         }
+        //descargar el blob para mostrarlo en la vista, si el container es privado
+        public async Task<IActionResult> VerImagen(string containerName, string blobName)
+        {
+            Stream stream = await this.service.GetBlobStreamAsync(containerName, blobName);
+            return File(stream, "image/jpeg");
+        }
     }
 }

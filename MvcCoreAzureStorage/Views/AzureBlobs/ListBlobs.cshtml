@@ -41,7 +41,8 @@
                 @item.Container
             </td>
             <td>
-                <img src="@item.Url" style="width:100px" alt="@item.Url"/>
+                <img src="@Url.Action("VerImagen", "AzureBlobs", new { containerName = item.Container, blobName = item.Nombre })"
+                        style="width:100px; height: 100px" />
             </td>
         </tr>
 }
