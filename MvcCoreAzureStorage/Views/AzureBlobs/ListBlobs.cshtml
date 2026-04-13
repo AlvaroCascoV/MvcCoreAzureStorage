@@ -1,0 +1,49 @@
+﻿@model IEnumerable<MvcCoreAzureStorage.Models.BlobModel>
+
+<h1>ListBlobs</h1>
+
+<p>
+    <a asp-action="UploadBlob" asp-route-containername="@ViewData["CONTAINER"]" class="btn btn-success">UploadBlob</a>
+</p>
+
+<p>
+    <a asp-controller="AzureBlobs" asp-action="Index">Back to Index</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Accion
+            </th>
+            <th>
+                Url
+            </th>
+            <th>
+                Container
+            </th>
+            <th>
+                Imagen
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+            <tr>
+                <td>
+                    <a asp-controller="AzureBlobs" asp-action="DeleteBlob"
+                    asp-route-containername="@item.Container" asp-route-blobname="@item.Nombre" 
+                    class="btn btn-danger">Delete blob: <b>@item.Nombre</b></a>
+                </td>
+            <td>
+                <a href="@item.Url" target="_blank">@item.Url</a>
+            </td>
+            <td>
+                @item.Container
+            </td>
+            <td>
+                <img src="@item.Url" style="width:100px" alt="@item.Url"/>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
