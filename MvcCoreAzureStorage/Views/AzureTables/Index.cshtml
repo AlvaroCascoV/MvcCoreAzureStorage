@@ -1,0 +1,88 @@
+﻿@model IEnumerable<MvcCoreAzureStorage.Models.Cliente>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-success">Create New</a>
+</p>
+
+<form method="post">
+    <label>Empresa:</label>
+    <input type="text" name="empresa" class="form-control"/>
+    <button class="btn btn-info">Buscar</button>
+</form>
+
+@if (Model != null)
+{
+    
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Nombre
+            </th>
+            <th>
+                Edad
+            </th>
+            <th>
+                Salario
+            </th>
+            <th>
+                IdCliente
+            </th>
+            <th>
+                Empresa
+            </th>
+            <th>
+                PartitionKey
+            </th>
+            <th>
+                RowKey
+            </th>
+            <th>
+                Timestamp
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @item.Nombre
+            </td>
+            <td>
+                @item.Edad
+            </td>
+            <td>
+                @item.Salario
+            </td>
+            <td>
+                @item.IdCliente
+            </td>
+            <td>
+                @item.Empresa
+            </td>
+            <td>
+                @item.PartitionKey
+            </td>
+            <td>
+                @item.RowKey
+            </td>
+            <td>
+                @item.Timestamp
+            </td>
+            <td>
+                <a asp-action="Details" asp-route-partitionKey="@item.PartitionKey" asp-route-rowKey="@item.RowKey" class="btn btn-primary">Details</a>
+                <a asp-action="Delete" asp-route-partitionKey="@item.PartitionKey" asp-route-rowKey="@item.RowKey" class="btn btn-danger">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+}
